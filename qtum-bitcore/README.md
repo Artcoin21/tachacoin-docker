@@ -32,7 +32,7 @@ sudo mkdir -p /data/qtum-data
 sudo chmod a+w /data/qtum-data
 ```
 
-Create your config file, refer to the example [qtum.conf]!(https://github.com/qtumproject/qtum/blob/1a926b980f03e97322c7dd787835bec1730f35d2/contrib/debian/examples/qtum.conf). Note rpcuser and rpcpassword to required for later `qtum-cli` usage for docker, so it is better to set those two options. Then please create the file ${PWD}/qtum.conf with content:
+Create your config file, refer to the example [qtum.conf]!(https://github.com/tachacoin/qtum/blob/1a926b980f03e97322c7dd787835bec1730f35d2/contrib/debian/examples/qtum.conf). Note rpcuser and rpcpassword to required for later `qtum-cli` usage for docker, so it is better to set those two options. Then please create the file ${PWD}/qtum.conf with content:
 
 ```
 rpcuser=qtum

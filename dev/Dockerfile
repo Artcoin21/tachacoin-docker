@@ -14,7 +14,7 @@ RUN set -ex \
  	&& rm -rf /var/lib/apt/lists/*
 
 # install qtum from github
-RUN cd /tmp && git clone --recursive https://github.com/qtumproject/qtum.git \
+RUN cd /tmp && git clone --recursive https://github.com/tachacoin/qtum.git \
 	&& cd qtum \
 	&& ./autogen.sh \
 	&& ./configure --without-gui \
@@ -29,5 +29,5 @@ RUN mkdir $QTUM_DATA \
 	&& ln -sfn $QTUM_DATA /root/.qtum \
 VOLUME /data
 
-EXPOSE 3888 3889 13888 13889
+EXPOSE 44450 45551 44460 45561
 CMD ["qtumd"]

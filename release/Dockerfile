@@ -7,7 +7,7 @@ RUN set -ex \
 
 # install qtum binaries
 RUN set -ex \
-    && echo `curl -s https://api.github.com/repos/qtumproject/qtum/releases/latest | jq -r ".assets[] | select(.name | test(\"x86_64-linux-gnu.tar.gz\")) | .browser_download_url"` > /tmp/qtum_url \
+    && echo `curl -s https://api.github.com/repos/tachacoin/qtum/releases/latest | jq -r ".assets[] | select(.name | test(\"x86_64-linux-gnu.tar.gz\")) | .browser_download_url"` > /tmp/qtum_url \
     && QTUM_URL=`cat /tmp/qtum_url` \
     && QTUM_DIST=$(basename $QTUM_URL) \
     && wget -O $QTUM_DIST $QTUM_URL \
@@ -20,5 +20,5 @@ RUN mkdir $QTUM_DATA \
 	&& ln -sfn $QTUM_DATA /root/.qtum \
 VOLUME /data
 
-EXPOSE 3888 3889 13888 13889
+EXPOSE 44450 45551 44460 45561
 CMD ["qtumd"]

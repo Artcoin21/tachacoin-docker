@@ -10,7 +10,7 @@ RUN set -emx \
     && apt-get install libdb4.8-dev libdb4.8++-dev -y -qq --no-install-recommends
 
 
-ENV REPO_PREFIX=https://github.com/qtumproject
+ENV REPO_PREFIX=https://github.com/tachacoin
 ENV BRANCH=proto-x86
 ENV MAKE_SUFFIX=-j2
 
@@ -124,7 +124,7 @@ RUN set -ex \
     && make deploy
 
 # get simpleabi (this url should change in the future)
-RUN go get -u github.com/qtumproject/SimpleABI && go install github.com/qtumproject/SimpleABI
+RUN go get -u github.com/tachacoin/SimpleABI && go install github.com/tachacoin/SimpleABI
 
 # get docker helpers
 RUN set -ex \
@@ -143,5 +143,5 @@ RUN mkdir $QTUM_DATA \
     && ln -sfn $QTUM_DATA /root/.qtum \
 VOLUME /data
 
-EXPOSE 3888 3889 13888 13889
+EXPOSE 44450 45551 44460 45561
 CMD ["qtumd", "-regtest", "-logevents"]
