@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd ~/bind
-~/qtum/qtum-cli -regtest "$@"
+~/tachacoin/tachacoin-cli -regtest "$@"

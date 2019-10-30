@@ -1,2 +1,2 @@
 #!/bin/sh
-docker build -t qtumx86 -f Dockerfile .
+docker build -t tachacoinx86 -f Dockerfile .

@@ -13,9 +13,9 @@ RUN set -ex \
 	&& apt-get install -y libzmq3-dev \
  	&& rm -rf /var/lib/apt/lists/*
 
-# install qtum from github
-RUN cd /tmp && git clone --recursive https://github.com/tachacoin/qtum.git \
-	&& cd qtum \
+# install tachacoin from github
+RUN cd /tmp && git clone --recursive https://github.com/tachacoin/tachacoin.git \
+	&& cd tachacoin \
 	&& ./autogen.sh \
 	&& ./configure --without-gui \
 	&& make \
@@ -24,10 +24,10 @@ RUN cd /tmp && git clone --recursive https://github.com/tachacoin/qtum.git \
 	&& rm -rf /tmp/*
 
 # create data directory
-ENV QTUM_DATA /data
-RUN mkdir $QTUM_DATA \
-	&& ln -sfn $QTUM_DATA /root/.qtum \
+ENV TACHACOIN_DATA /data
+RUN mkdir $TACHACOIN_DATA \
+	&& ln -sfn $TACHACOIN_DATA /root/.tachacoin \
 VOLUME /data
 
 EXPOSE 44450 45551 44460 45561
-CMD ["qtumd"]
+CMD ["tachacoind"]

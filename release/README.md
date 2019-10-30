@@ -7,75 +7,75 @@ You might take either way:
 ### Pull a image from Public Docker hub
 
 ```
-$ docker pull qtum/qtum
+$ docker pull tachacoin/tachacoin
 ```
 
-### Or, build qtum image with provided Dockerfile
+### Or, build tachacoin image with provided Dockerfile
 
 ```
-$docker build --rm -t qtum/qtum .
+$docker build --rm -t tachacoin/tachacoin .
 ```
 
-For historical versions, please visit [docker hub](https://hub.docker.com/r/qtum/qtum/)
+For historical versions, please visit [docker hub](https://hub.docker.com/r/tachacoin/tachacoin/)
 
-## Prepare data path and qtum.conf
+## Prepare data path and tachacoin.conf
 
 In order to use user-defined config file, as well as save block chain data, -v option for docker is recommended.
 
-First chose a path to save qtum block chain data:
+First chose a path to save tachacoin block chain data:
 
 ```
-sudo rm -rf /data/qtum-data
-sudo mkdir -p /data/qtum-data
-sudo chmod a+w /data/qtum-data
+sudo rm -rf /data/tachacoin-data
+sudo mkdir -p /data/tachacoin-data
+sudo chmod a+w /data/tachacoin-data
 ```
 
-Create your config file, refer to the example [qtum.conf]!(https://github.com/tachacoin/qtum/blob/1a926b980f03e97322c7dd787835bec1730f35d2/contrib/debian/examples/qtum.conf). Note rpcuser and rpcpassword to required for later `qtum-cli` usage for docker, so it is better to set those two options. Then please create the file ${PWD}/qtum.conf with content:
+Create your config file, refer to the example [tachacoin.conf]!(https://github.com/tachacoin/tachacoin/blob/1a926b980f03e97322c7dd787835bec1730f35d2/contrib/debian/examples/tachacoin.conf). Note rpcuser and rpcpassword to required for later `tachacoin-cli` usage for docker, so it is better to set those two options. Then please create the file ${PWD}/tachacoin.conf with content:
 
 ```
-rpcuser=qtum
-rpcpassword=qtumtest
+rpcuser=tachacoin
+rpcpassword=tachacointest
 ```
-## Launch qtumd
+## Launch tachacoind
 
-To launch qtum node:
+To launch tachacoin node:
 
 ```
-## to launch qtumd
-$ docker run -d --rm --name qtum_node \
-             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
-             -v /data/qtum-data/:/root/.qtum/ \
-             qtum/qtum qtumd
+## to launch tachacoind
+$ docker run -d --rm --name tachacoin_node \
+             -v ${PWD}/tachacoin.conf:/root/.tachacoin/tachacoin.conf \
+             -v /data/tachacoin-data/:/root/.tachacoin/ \
+             tachacoin/tachacoin tachacoind
 
 ## check docker processed
 $ docker ps
 
-## to stop qtumd
-$ docker run -i --network container:qtum_node \
-             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
-             -v /data/qtum-data/:/root/.qtum/ \
-             qtum/qtum qtum-cli stop
+## to stop tachacoind
+$ docker run -i --network container:tachacoin_node \
+             -v ${PWD}/tachacoin.conf:/root/.tachacoin/tachacoin.conf \
+             -v /data/tachacoin-data/:/root/.tachacoin/ \
+             tachacoin/tachacoin tachacoin-cli stop
 ```
 
-`${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum-data/
+`${PWD}/tachacoin.conf` will be used, and blockchain data saved under /data/tachacoin-data/
 
-## Interact with `qtumd` using `qtum-cli`
+## Interact with `tachacoind` using `tachacoin-cli`
 
-Use following docker command to interact with your qtum node with `qtum-cli`:
-
-```
-$ docker run -i --network container:qtum_node \
-             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
-             -v /data/qtum-data/:/root/.qtum/ \
-             qtum/qtum qtum-cli getinfo
-```
-
-For more qtum-cli commands, use:
+Use following docker command to interact with your tachacoin node with `tachacoin-cli`:
 
 ```
-$ docker run -i --network container:qtum_node \
-             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
-             -v /data/qtum-data/:/root/.qtum/ \
-             qtum/qtum qtum-cli help
+$ docker run -i --network container:tachacoin_node \
+             -v ${PWD}/tachacoin.conf:/root/.tachacoin/tachacoin.conf \
+             -v /data/tachacoin-data/:/root/.tachacoin/ \
+             tachacoin/tachacoin tachacoin-cli getinfo
+```
+
+For more tachacoin-cli commands, use:
+
+```
+$ docker run -i --network container:tachacoin_node \
+             -v ${PWD}/tachacoin.conf:/root/.tachacoin/tachacoin.conf \
+             -v /data/tachacoin-data/:/root/.tachacoin/ \
+             tachacoin/tachacoin tachacoin-cli help
 ```
 

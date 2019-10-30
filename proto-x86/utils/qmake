@@ -1,12 +1,12 @@
 #!/bin/bash
 
-export CC=i686-qtum-gcc
-export LD=i686-qtum-ld
-export CXX=i686-qtum-g++
-export CPP=i686-qtum-cpp
-export AR=i686-qtum-ar
-export STRIP=i686-qtum-strip
-export OBJCOPY=i686-qtum-objcopy
+export CC=i686-tachacoin-gcc
+export LD=i686-tachacoin-ld
+export CXX=i686-tachacoin-g++
+export CPP=i686-tachacoin-cpp
+export AR=i686-tachacoin-ar
+export STRIP=i686-tachacoin-strip
+export OBJCOPY=i686-tachacoin-objcopy
 
 cd ${HOME}/bind
 

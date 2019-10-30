@@ -1,6 +1,6 @@
 # Quickstart
 
-This is a qtum-qt image, launch GUI wallet
+This is a tachacoin-qt image, launch GUI wallet
 
 ## Get docker image
 
@@ -9,48 +9,48 @@ To get the latest image, you might take either way:
 ### Pull a image from Public Docker hub
 
 ```
-$ docker pull qtum/qtum-qt
+$ docker pull tachacoin/tachacoin-qt
 ```
 
-### Or, build qtum image with provided Dockerfile
+### Or, build tachacoin image with provided Dockerfile
 
 ```
-$docker build --rm -t qtum/qtum-qt .
+$docker build --rm -t tachacoin/tachacoin-qt .
 ```
 
-For historical versions, please visit [docker hub](https://hub.docker.com/r/qtum/qtum-qt/)
+For historical versions, please visit [docker hub](https://hub.docker.com/r/tachacoin/tachacoin-qt/)
 
-## Prepare data path & qtum.conf
+## Prepare data path & tachacoin.conf
 
 In order to use user-defined config file, as well as save block chain data, -v option for docker is recommended.
 
-First chose a path to save qtum block chain data:
+First chose a path to save tachacoin block chain data:
 
 ```
-sudo rm -rf /data/qtum-data
-sudo mkdir -p /data/qtum-data
-sudo chmod a+w /data/qtum-data
+sudo rm -rf /data/tachacoin-data
+sudo mkdir -p /data/tachacoin-data
+sudo chmod a+w /data/tachacoin-data
 ```
 
-Create your config file, refer to the example [qtum.conf]!(https://github.com/tachacoin/qtum/blob/1a926b980f03e97322c7dd787835bec1730f35d2/contrib/debian/examples/qtum.conf). Then please create the file ${PWD}/qtum.conf with content:
+Create your config file, refer to the example [tachacoin.conf]!(https://github.com/tachacoin/tachacoin/blob/1a926b980f03e97322c7dd787835bec1730f35d2/contrib/debian/examples/tachacoin.conf). Then please create the file ${PWD}/tachacoin.conf with content:
 
 ```
-rpcuser=qtum
-rpcpassword=qtumtest
+rpcuser=tachacoin
+rpcpassword=tachacointest
 ```
 
 User can set their own config file on demands.
 
-## Launch qtum-qt
+## Launch tachacoin-qt
 
 For Linux:
 
 ```
 $ docker run -it --rm \
              -v /tmp/.X11-unix:/tmp/.X11-unix \
-             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
-             -v /data/qtum-data/:/root/.qtum/ \
-             -e DISPLAY  qtum/qtum-qt
+             -v ${PWD}/tachacoin.conf:/root/.tachacoin/tachacoin.conf \
+             -v /data/tachacoin-data/:/root/.tachacoin/ \
+             -e DISPLAY  tachacoin/tachacoin-qt
 ```
 
 For Mac:
@@ -69,16 +69,16 @@ $ open -a Xquartz
 
 ## then set Xquartz preferences "Security-'Allow connections from network clients'"
 
-## launch qtum-qt 
-$ docker run -e DISPLAY=<your_ip>:0 -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum-qt
+## launch tachacoin-qt 
+$ docker run -e DISPLAY=<your_ip>:0 -v ${PWD}/tachacoin.conf:/root/.tachacoin/tachacoin.conf -v /data/tachacoin-data/:/root/.tachacoin/ tachacoin/tachacoin-qt
 
 ```
 
 
-`${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum-data/
+`${PWD}/tachacoin.conf` will be used, and blockchain data saved under /data/tachacoin-data/
 
 
-## exit qtum-qt
+## exit tachacoin-qt
 
 Exit the gui wallet in normal way.
 

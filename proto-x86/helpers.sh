@@ -1,6 +1,6 @@
 #!/bin/bash
 function qx86start() {
-    docker run --rm -v "${PWD}:/root/bind" --name qx86 -d qtumx86 qtum/qtumd -regtest -logevents
+    docker run --rm -v "${PWD}:/root/bind" --name qx86 -d tachacoinx86 tachacoin/tachacoind -regtest -logevents
 }
 export -f qx86start
 
@@ -17,17 +17,17 @@ function qx86deploy() {
 export -f qx86deploy
 
 function qx86tb() {
-    docker run --rm -v "${PWD}:/root/bind" qtumx86 x86tb
+    docker run --rm -v "${PWD}:/root/bind" tachacoinx86 x86tb
 }
 export -f qx86tb
 
 function qx86make() {
-    docker run --rm -v "${PWD}:/root/bind" qtumx86 qmake "$@"
+    docker run --rm -v "${PWD}:/root/bind" tachacoinx86 qmake "$@"
 }
 export -f qx86make
 
 function qx86simpleabi() {
-    docker run -it -v "${PWD}:/root/bind" -w /root/bind qtumx86 SimpleABI -a "$1" -d -e
+    docker run -it -v "${PWD}:/root/bind" -w /root/bind tachacoinx86 SimpleABI -a "$1" -d -e
 }
 
 export -f qx86simpleabi

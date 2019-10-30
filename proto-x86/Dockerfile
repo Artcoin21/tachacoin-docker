@@ -27,7 +27,7 @@ RUN set -ex \
 ENV PREFIX=/opt/cross
 ENV TARGET=i686-elf
 ENV SYSROOT=/opt/x86-compiler/sysroot
-ENV PATH=${PATH}:${SYSROOT}/bin:$PREFIX/bin:/root/qtum:/root/qtum:/root/qtum-docker/proto-x86/utils:/root/go/bin
+ENV PATH=${PATH}:${SYSROOT}/bin:$PREFIX/bin:/root/tachacoin:/root/tachacoin:/root/tachacoin-docker/proto-x86/utils:/root/go/bin
 
 # build the freestanding compiler
 RUN set -ex \
@@ -52,9 +52,9 @@ RUN set -ex \
     && cd FsLibc \
     && git checkout $BRANCH
 
-ENV TARGET=i686-qtum
+ENV TARGET=i686-tachacoin
 
-#compile QtumOS compiler and supports
+#compile TachacoinOS compiler and supports
 RUN set -ex \
     && ls $PREFIX/bin \
     && i686-elf-gcc -v \
@@ -87,39 +87,39 @@ RUN set -ex \
 
 
 
-# get qtum source
+# get tachacoin source
 RUN set -ex \
-    && git clone $REPO_PREFIX/qtum qtum-compile --recursive \
-    && cd qtum-compile \
+    && git clone $REPO_PREFIX/tachacoin tachacoin-compile --recursive \
+    && cd tachacoin-compile \
     && git checkout $BRANCH
 
-# build qtum
+# build tachacoin
 RUN set -ex \
-    && cd qtum-compile \
+    && cd tachacoin-compile \
     && ./autogen.sh \
     && ./configure --disable-tests --without-gui \
     && make $MAKE_SUFFIX
 
 # build x86lib utility
 RUN set -ex \
-    && cd qtum-compile/src/x86lib \ 
+    && cd tachacoin-compile/src/x86lib \ 
     && make $MAKE_SUFFIX
 
-#install qtum tools
+#install tachacoin tools
 RUN set -ex \
-    && cd qtum-compile \
-    && mkdir /root/qtum \
-    && cp src/qtumd src/qtum-cli src/qtum-tx src/x86lib/x86testbench /root/qtum
+    && cd tachacoin-compile \
+    && mkdir /root/tachacoin \
+    && cp src/tachacoind src/tachacoin-cli src/tachacoin-tx src/x86lib/x86testbench /root/tachacoin
 
-# get libqtum
+# get libtachacoin
 RUN set -ex \
-    && git clone $REPO_PREFIX/libqtum \
-    && cd libqtum \
+    && git clone $REPO_PREFIX/libtachacoin \
+    && cd libtachacoin \
     && git checkout $BRANCH
 
-# build libqtum
+# build libtachacoin
 RUN set -ex \
-    && cd libqtum \
+    && cd libtachacoin \
     && make \
     && make deploy
 
@@ -128,20 +128,20 @@ RUN go get -u github.com/tachacoin/SimpleABI && go install github.com/tachacoin/
 
 # get docker helpers
 RUN set -ex \
-    && git clone $REPO_PREFIX/qtum-docker \
-    && cd qtum-docker \
+    && git clone $REPO_PREFIX/tachacoin-docker \
+    && cd tachacoin-docker \
     && git checkout $BRANCH
 
 #clean up
 RUN set -ex \
-    && rm -rf qtum-compile \
+    && rm -rf tachacoin-compile \
     && rm -rf x86-toolchain
 
 # create data directory
-ENV QTUM_DATA /data
-RUN mkdir $QTUM_DATA \
-    && ln -sfn $QTUM_DATA /root/.qtum \
+ENV TACHACOIN_DATA /data
+RUN mkdir $TACHACOIN_DATA \
+    && ln -sfn $TACHACOIN_DATA /root/.tachacoin \
 VOLUME /data
 
 EXPOSE 44450 45551 44460 45561
-CMD ["qtumd", "-regtest", "-logevents"]
+CMD ["tachacoind", "-regtest", "-logevents"]
